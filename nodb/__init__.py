@@ -16,6 +16,7 @@ try:
 except Exception:
     import pickle
 
+
 class NoDB(object):
     """
     A NoDB connection object.
@@ -44,7 +45,8 @@ class NoDB(object):
         if self.profile_name:
             session = boto3.session.Session(profile_name=self.profile_name)
         if session:
-            self.s3 = session.resource('s3', config=botocore.client.Config(signature_version=self.signature_version))
+            self.s3 = session.resource(
+                's3', config=botocore.client.Config(signature_version=self.signature_version))
 
     ##
     # Advanced config
@@ -130,7 +132,7 @@ class NoDB(object):
             try:
                 serialized_s3 = self.s3.Object(self.bucket, self.prefix + real_index)
                 serialized = serialized_s3.get()["Body"].read()
-            except botocore.exceptions.ClientError as e:
+            except botocore.exceptions.ClientError:
                 # No Key? Return default.
                 logging.debug("No remote object, returning default.")
                 return default
@@ -175,7 +177,6 @@ class NoDB(object):
         else:
             return False
 
-
     ###
     # Private interfaces
     ###
@@ -213,7 +214,6 @@ class NoDB(object):
         Unpack and load data from a serialized NoDB entry.
         """
 
-        obj = None
         deserialized = json.loads(serialized)
         return_me = {}
 
@@ -222,7 +222,8 @@ class NoDB(object):
             if self.serializer != 'pickle':
                 raise Exception("Security exception: Won't unpickle if not set to pickle.")
 
-            return_me['obj'] = pickle.loads(base64.b64decode(deserialized['obj'].encode(self.encoding)))
+            return_me['obj'] = pickle.loads(
+                base64.b64decode(deserialized['obj'].encode(self.encoding)))
 
         elif deserialized['serializer'] == 'json':
             return_me['obj'] = deserialized['obj']

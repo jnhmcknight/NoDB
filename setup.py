@@ -1,42 +1,43 @@
-import os
-import sys
-from setuptools import setup
+from setuptools import setup, find_packages
 
-# Set external files
-try:
-    from pypandoc import convert
-    README = convert('README.md', 'rst')
-except ImportError:
-    README = open(os.path.join(os.path.dirname(__file__), 'README.md')).read()
+exec(open('version.py').read())
 
-with open(os.path.join(os.path.dirname(__file__), 'requirements.txt')) as f:
-    required = f.read().splitlines()
+install_requirements = [
+    'appdirs>=1.4.3',
+    'boto3',
+    'botocore',
+    'docutils>=0.13.1',
+    'flake8',
+    'funcsigs>=1.0.2',
+    'futures>=3.0.5',
+    'jmespath>=0.9.2',
+    'packaging>=16.8',
+    'pbr>=2.0.0',
+    'pyparsing>=2.2.0',
+    'python-dateutil==2.6.0',
+    's3transfer',
+    'six>=1.10.0',
+]
 
-with open(os.path.join(os.path.dirname(__file__), 'test_requirements.txt')) as f:
-    test_required = f.read().splitlines()
+test_requirements = [
+    'pytest',
+    'moto'
+]
 
 setup(
     name='nodb',
-    version='0.4.0',
-    packages=['nodb'],
-    install_requires=required,
-    tests_require=test_required,
-    test_suite='nose.collector',
+    author='Anderson Reyes',
+    author_email='anderson@pymetrics.com',
+    version=__version__,  # noqa
+    packages=find_packages(exclude=["*.tests", "*.tests.*", "tests.*", "tests"]),
     include_package_data=True,
-    license='MIT License',
+    license='Creative Commons Attribution-Noncommercial-Share Alike license',
     description="NoDB isn't a database.. but it sort of looks like one.",
-    long_description=README,
-    url='https://github.com/Miserlou/NoDB',
-    author='Rich Jones',
-    author_email='rich@openwatch.net',
-    classifiers=[
-        'Environment :: Console',
-        'License :: OSI Approved :: Apache Software License',
-        'Operating System :: OS Independent',
-        'Programming Language :: Python',
-        'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3.5',
-        'Topic :: Internet :: WWW/HTTP',
-        'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
-    ],
+    install_requires=install_requirements,
+    tests_require=test_requirements,
+    setup_requires=['pytest-runner'],
+    extras_require={
+        'dev': test_requirements
+    }
+
 )

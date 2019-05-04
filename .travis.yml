@@ -1,19 +1,23 @@
 language: python
 python:
   - "2.7"
-#  - "3.5"
+  - "3.6"
 # command to install dependencies
 cache:
   - pip
+
 install:
-  - "pip install setuptools --upgrade; pip install -r test_requirements.txt; python setup.py install" 
-# command to run tests
-env:
-  - TESTCASE=tests/tests.py
-script: 
-  - nosetests $TESTCASE --with-coverage --cover-package=nodb --with-timer
-    #  - coverage combine --append
-after_success:
-  coveralls
+  - make install
+  - pip install flake8
+
+script:
+  - flake8
+  - make is_newest_version
+  - make tests
+
+branches:
+only:
+  - master
+
 notifications:
-  slack: zappateam:TTJ0mfHunDK0IBweKkEXjGpR
+  slack: pymetrics:KChIHKNZmyRqFuUPC0IQBocG
