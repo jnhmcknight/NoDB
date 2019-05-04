@@ -25,7 +25,7 @@ test_requirements = [
 ]
 
 setup(
-    name='nodb',
+    name='pym-nodb',
     author='Anderson Reyes',
     author_email='anderson@pymetrics.com',
     version=__version__,  # noqa
