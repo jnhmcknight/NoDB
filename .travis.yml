@@ -16,8 +16,15 @@ script:
   - make tests
 
 branches:
-only:
-  - master
+  only:
+    - master
+
+deploy:
+  - provider: script
+    script: make publish
+    skip_cleanup: true
+    on:
+        branch: master
 
 notifications:
   slack: pymetrics:KChIHKNZmyRqFuUPC0IQBocG
