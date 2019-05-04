@@ -1,5 +1,0 @@
-[
-  "tests/test_nodb.py::TestNoDB::test_nodb",
-  "tests/test_nodb.py::TestNoDB::test_nodb_cache",
-  "tests/test_nodb.py::TestNoDB::test_test"
-]
