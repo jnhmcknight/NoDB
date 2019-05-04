@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-exec(open('version.py').read())
+exec(open('nodb/version.py').read())
 
 install_requirements = [
     'appdirs>=1.4.3',
@@ -25,7 +25,7 @@ test_requirements = [
 ]
 
 setup(
-    name='pym-nodb',
+    name='pym_nodb',
     author='Anderson Reyes',
     author_email='anderson@pymetrics.com',
     version=__version__,  # noqa

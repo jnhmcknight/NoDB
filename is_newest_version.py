@@ -3,8 +3,8 @@ from distutils.version import StrictVersion
 import requests
 
 
-PACKAGE_NAME = 'nodb'
-exec(open('version.py').read())
+PACKAGE_NAME = 'pym_nodb'
+exec(open('nodb/version.py').read())
 
 
 def versions(package_name):
