@@ -1,4 +1,6 @@
-.PHONY: clean install is_newest_version tests publish
+.PHONY: clean install is_newest_version tests publish all
+
+all: install tests
 
 clean:
 	find . -name "*.py[c|o]" -o -name __pycache__ -exec rm -rf {} +

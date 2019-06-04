@@ -1,15 +1,15 @@
-from datetime import datetime
-from io import BytesIO
-
 import base64
-import boto3
-import botocore
+from datetime import datetime
 import hashlib
+from io import BytesIO
 import json
 import logging
 import os
 import tempfile
 import uuid
+
+import boto3
+import botocore
 
 try:
     import cPickle as pickle

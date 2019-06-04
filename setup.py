@@ -3,25 +3,13 @@ from setuptools import setup, find_packages
 exec(open('nodb/version.py').read())
 
 install_requirements = [
-    'appdirs>=1.4.3',
-    'boto3',
-    'botocore',
-    'docutils>=0.13.1',
-    'flake8',
-    'funcsigs>=1.0.2',
-    'futures>=3.0.5',
-    'jmespath>=0.9.2',
-    'packaging>=16.8',
-    'pbr>=2.0.0',
-    'pyparsing>=2.2.0',
-    'python-dateutil==2.6.0',
-    's3transfer',
-    'six>=1.10.0',
+    'boto3'
 ]
 
 test_requirements = [
+    'flake8',
+    'moto',
     'pytest',
-    'moto'
 ]
 
 setup(
